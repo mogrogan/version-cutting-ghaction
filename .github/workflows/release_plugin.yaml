@@ -28,6 +28,7 @@ jobs:
       run: |
         sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
         sed -i 's/\"dev\"/""/g'  "./version/version.go"
+        sed 's/">=\s[0-9]*\\.[0-9]*\\.[0-9]*"/">= ${{ github.event.inputs.new_version }}"/g' ./README.md
         sed -i 's/">=[[:space:]][0-9]*\\.[0-9]*\\.[0-9]*"/">= ${{ github.event.inputs.new_version }}"/g' ./README.md
     - run: git add ./version/version.go ./README.md
     - run: cat ./version/version.go 
