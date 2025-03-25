@@ -22,7 +22,6 @@ jobs:
     - name: update version.go and README.md version for cutting release
       run: |
         set -e
-
         
 
         
