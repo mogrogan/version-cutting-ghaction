@@ -42,9 +42,9 @@ jobs:
         sed -i "s/$last_semver/$semver/g" --regexp-extended "./README.md"                        
         sed -i 's/\"dev\"/""/g' "./version/version.go"
         sed -i -r 's/(VersionPrerelease\s*=\s*)"dev"/\1""/' "./version/version.go"                        
-        echo "TODO: commit + tag"
+        git diff
         git add ./version/version.go ./README.md
-        git commit -m "version: cutting version v$semver"
+        git commit -m "version: cut release v$semver"
         git tag "v$semver"
         echo
 
@@ -52,6 +52,8 @@ jobs:
         sed -i "s/$semver/$dev_semver/g" --regexp-extended "./version/version.go"                        
         sed -i -r 's/(VersionPrerelease\s*=\s*)""/\1"dev"/' "./version/version.go"                        
         git diff
+        git add ./version/version.go
+        git commit -m "version: prepare v$dev_semver"
 
         exit 1
     - run: git add ./version/version.go ./README.md
