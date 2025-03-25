@@ -37,10 +37,17 @@ jobs:
         echo "Next semver is v$semver"
         echo
 
-        echo "# CUT RELEASE #"
+        echo "# CUTTING RELEASE v$semver #"
         sed -i "s/$last_semver/$semver/g" --regexp-extended "./version/version.go"                        
-        sed "s/$last_semver/$semver/g" --regexp-extended "./README.md"                        
-        sed 's/\"dev\"/""/g' "./version/version.go"
+        sed -i "s/$last_semver/$semver/g" --regexp-extended "./README.md"                        
+        sed -i 's/\"dev\"/""/g' "./version/version.go"
+        echo "TODO: commit + tag"
+        cat "./version/version.go"
+        cat "./README.md"
+
+        echo "# PREPARE v$dev_semver-dev #"
+        sed -i "s/$semver/$dev_semver/g" --regexp-extended "./version/version.go"                        
+        cat "./version/version.go"
 
         # sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
         # sed -i 's/\"dev\"/""/g'  "./version/version.go"
