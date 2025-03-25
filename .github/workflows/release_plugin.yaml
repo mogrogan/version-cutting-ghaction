@@ -43,15 +43,12 @@ jobs:
         sed -i 's/\"dev\"/""/g' "./version/version.go"
         sed -i -r 's/(VersionPrerelease\s*=\s*)"dev"/\1""/' "./version/version.go"                        
         echo "TODO: commit + tag"
-        cat "./version/version.go"
-        cat "./README.md"
+        git diff
 
         echo "# PREPARE v$dev_semver-dev #"
         sed -i "s/$semver/$dev_semver/g" --regexp-extended "./version/version.go"                        
         sed -i -r 's/(VersionPrerelease\s*=\s*)""/\1"dev"/' "./version/version.go"                        
-        cat "./version/version.go"
-
-        git status
+        git diff
 
         # sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
         # sed -i 's/\"dev\"/""/g'  "./version/version.go"
