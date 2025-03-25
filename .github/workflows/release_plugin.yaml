@@ -25,6 +25,7 @@ jobs:
       run: |
         set -e
 
+
         echo "# SETTING UP SEMVER VALUES #"
         last_tag=$(git describe --tags --abbrev=0)
         last_semver=${last_tag:1}
@@ -36,6 +37,11 @@ jobs:
         echo "Next dev semver is v$dev_semver-dev"
         echo "Next semver is v$semver"
         echo
+
+        if git rev-parse -q --verify "refs/tags/v$semver" >/dev/null; then
+          echo "error: v$semver already exists."
+          exit 1
+        fi
 
         echo "# CUTTING RELEASE v$semver #"
         sed -i -E "s/$last_semver/$semver/g" "./version/version.go"                        
