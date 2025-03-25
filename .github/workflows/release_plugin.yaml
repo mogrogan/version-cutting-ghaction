@@ -44,6 +44,7 @@ jobs:
         sed -i -r 's/(VersionPrerelease\s*=\s*)"dev"/\1""/' "./version/version.go"                        
         echo "TODO: commit + tag"
         git diff
+        git add ./version/version.go ./README.md
         git commit -m "version: cutting version v$semver"
         git tag "v$semver"
 
