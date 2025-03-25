@@ -3,15 +3,12 @@ name: Release Plugin
 on:
   workflow_dispatch:
     inputs:
-      new_version:
+      release_version:
         type: string
         description: "The semver version of the release (ie: 1.2.3)"
         required: true
 jobs:
   release_plugin:
-    env:
-      CUTTING_VERSION_COMMIT_MSG: "version: cutting version v${{ github.event.inputs.new_version }}"
-
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -32,7 +29,7 @@ jobs:
         echo -e "$Green# SETTING UP SEMVER VALUES #"
         last_tag=$(git describe --tags --abbrev=0)
         last_semver=${last_tag:1}
-        semver=${{ github.event.inputs.new_version }}     
+        semver=${{ github.event.inputs.release_version }}     
         echo "$semver" > current_version_file
         IFS='.' read major minor patch<current_version_file
         dev_semver="$major.$minor.$(($patch + 1))"
