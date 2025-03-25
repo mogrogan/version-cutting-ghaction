@@ -28,7 +28,7 @@ jobs:
         Red='\033[0;31m'          # Red
         Green='\033[0;32m' 
 
-        echo "$Green# SETTING UP SEMVER VALUES #"
+        echo -e "$Green# SETTING UP SEMVER VALUES #"
         last_tag=$(git describe --tags --abbrev=0)
         last_semver=${last_tag:1}
         semver=${{ github.event.inputs.new_version }}     
