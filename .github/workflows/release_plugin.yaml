@@ -25,8 +25,9 @@ jobs:
       run: |
         set -e
 
-        Red='\033[0;31m'          # Red
-        Green='\033[0;32m' 
+        Red='\033[0;31m'
+        Green='\033[0;32m'
+        BBlue='\033[1;34m'
 
         echo -e "$Green# SETTING UP SEMVER VALUES #"
         last_tag=$(git describe --tags --abbrev=0)
@@ -41,9 +42,9 @@ jobs:
           exit 1
         fi
 
-        echo "Last semver is v$last_semver"
-        echo "Next dev semver is v$dev_semver-dev"
-        echo "Next semver is v$semver"
+        echo "Last semver is $BBlue v$last_semver"
+        echo "Next dev semver is $BBlue v$dev_semver-dev"
+        echo "Next semver is $BBlue v$semver"
         echo
 
         echo -e "$Green# CUTTING RELEASE v$semver #"
