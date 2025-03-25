@@ -42,9 +42,9 @@ jobs:
           exit 1
         fi
 
-        echo "Last semver is $BBlue v$last_semver"
-        echo "Next dev semver is $BBlue v$dev_semver-dev"
-        echo "Next semver is $BBlue v$semver"
+        echo -e "Last semver is $BBlue v$last_semver"
+        echo -e "Next dev semver is $BBlue v$dev_semver-dev"
+        echo -e "Next semver is $BBlue v$semver"
         echo
 
         echo -e "$Green# CUTTING RELEASE v$semver #"
