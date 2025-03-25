@@ -45,7 +45,7 @@ jobs:
         echo -e "Last semver is $BBlue v$last_semver"
         echo -e "Next dev semver is $BBlue v$dev_semver-dev"
         echo -e "Next semver is $BBlue v$semver"
-        echo
+        printf "\n\n"
 
         echo -e "$Green# CUTTING RELEASE v$semver #"
         sed -i -E "s/$last_semver/$semver/g" "./version/version.go"                        
@@ -56,7 +56,7 @@ jobs:
         git add ./version/version.go ./README.md
         git commit -m "version: cut release v$semver"
         git tag "v$semver"
-        echo
+        printf "\n\n"
 
         echo -e "$Green# PREPARE v$dev_semver-dev #"
         sed -i -E "s/$semver/$dev_semver/g" "./version/version.go"                        
@@ -64,7 +64,7 @@ jobs:
         git diff
         git add ./version/version.go
         git commit -m "version: prepare v$dev_semver"
-        echo
+        printf "\n\n"
 
         exit 1
         echo -e "$Green# PUSHING COMMITS AND TAG #"
