@@ -25,7 +25,7 @@ jobs:
       run: |
         set -e
 
-        # Setup of all the needed semver values
+        echo "# SETTING UP SEMVER VALUES #"
         last_tag=$(git describe --tags --abbrev=0)
         echo "Last tag is $last_tag"
         semver=${{ github.event.inputs.new_version }}     
@@ -34,12 +34,16 @@ jobs:
         dev_semver="$major.$minor.$(($patch + 1))"
         echo "Next dev semver is v$dev_semver-dev"
         echo "Next semver is v$semver"
+        echo
+
+        echo "# CUT RELEASE #"
+        sed -E "s/\([0-9]*\.[0-9]*\.[0-9]*\)/$semver/g" "./version/version.go"        
         
                 
-        sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
-        sed -i 's/\"dev\"/""/g'  "./version/version.go"
-        sed -E 's/">=\s[0-9]*\\.[0-9]*\\.[0-9]*"/">= ${{ github.event.inputs.new_version }}"/g' ./README.md
-        sed -i 's/">=[[:space:]][0-9]*\\.[0-9]*\\.[0-9]*"/">= ${{ github.event.inputs.new_version }}"/g' ./README.md
+        # sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
+        # sed -i 's/\"dev\"/""/g'  "./version/version.go"
+        # sed -E 's/">=\s[0-9]*\\.[0-9]*\\.[0-9]*"/">= ${{ github.event.inputs.new_version }}"/g' ./README.md
+        # sed -i 's/">=[[:space:]][0-9]*\\.[0-9]*\\.[0-9]*"/">= ${{ github.event.inputs.new_version }}"/g' ./README.md
         exit 1
     - run: git add ./version/version.go ./README.md
     - run: cat ./version/version.go 
