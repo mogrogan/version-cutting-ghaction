@@ -23,6 +23,8 @@ jobs:
       run: |
         set -e
 
+        git fetch --tags
+
         last_tag=$(git describe --tags --abbrev=0)
         echo "Last tag is $last_tag"
                 
