@@ -6,7 +6,7 @@ package version
 import "github.com/hashicorp/packer-plugin-sdk/version"
 
 var (
-	Version           = "2.0.2"
+	Version           = "2.0.6"
 	VersionPrerelease = "dev"
 	VersionMetadata   = ""
 	PluginVersion     = version.NewPluginVersion(Version, VersionPrerelease, VersionMetadata)
