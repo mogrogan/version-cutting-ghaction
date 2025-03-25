@@ -66,7 +66,6 @@ jobs:
         git commit -m "version: prepare v$dev_semver"
         printf "\n\n"
 
-        exit 1
         echo -e "$Green# PUSHING COMMITS AND TAG #"
         git push
         git push origin "v$semver"
