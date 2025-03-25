@@ -32,7 +32,7 @@ jobs:
         cat current_version_file
         IFS='.' read major minor patch<current_version_file
         
-        dev_semver="$major.$minor.$patch"
+        dev_semver="$major.$minor.$(($patch++))"
         echo "Next dev semver is v$dev_semver"
                 
         sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
