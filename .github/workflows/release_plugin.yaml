@@ -21,7 +21,7 @@ jobs:
       with:
         fetch-depth: 0
     - uses: actions4git/setup-git@v1
-    - name: update version.go and README.md version for cutting release
+    - name: Cutting release and preparing dev
       run: |
         set -e
 
