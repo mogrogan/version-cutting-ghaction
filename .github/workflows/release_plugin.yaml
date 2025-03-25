@@ -38,7 +38,7 @@ jobs:
         echo
 
         if git rev-parse -q --verify "refs/tags/v$semver" >/dev/null; then
-          echo "error: release v$semver already exists."
+          echo -e "$RED error: release v$semver already exists."
           exit 1
         fi
 
@@ -46,7 +46,7 @@ jobs:
         echo "Next dev semver is v$dev_semver-dev"
         echo "Next semver is v$semver"
 
-        echo "# CUTTING RELEASE v$semver #"
+        echo -e "$Green# CUTTING RELEASE v$semver #"
         sed -i -E "s/$last_semver/$semver/g" "./version/version.go"                        
         sed -i -E "s/$last_semver/$semver/g" "./README.md"                        
         sed -i 's/\"dev\"/""/g' "./version/version.go"
@@ -57,7 +57,7 @@ jobs:
         git tag "v$semver"
         echo
 
-        echo "# PREPARE v$dev_semver-dev #"
+        echo -e "$GREEN# PREPARE v$dev_semver-dev #"
         sed -i -E "s/$semver/$dev_semver/g" "./version/version.go"                        
         sed -i -E 's/(VersionPrerelease\s*=\s*)""/\1"dev"/' "./version/version.go"                        
         git diff
@@ -66,6 +66,6 @@ jobs:
         echo
 
         exit 1
-        echo "# PUSHING COMMITS AND TAG #"
+        echo -e "$GREEN# PUSHING COMMITS AND TAG #"
         git push
         git push origin "v$semver"
