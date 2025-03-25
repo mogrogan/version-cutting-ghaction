@@ -54,7 +54,7 @@ jobs:
         git commit -m "version: cut release v$semver"
         git tag "v$semver"
         printf "\n\n"
-        exit 1 
+        exit 1
 
         echo -e "$Green# PREPARE v$dev_semver-dev #"
         sed -i -E "s/$semver/$dev_semver/g" "./version/version.go"                        
