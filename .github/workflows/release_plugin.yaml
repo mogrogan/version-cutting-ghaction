@@ -28,10 +28,12 @@ jobs:
         last_tag=$(git describe --tags --abbrev=0)
         echo "Last tag is $last_tag"
 
-        echo "${{ github.event.inputs.new_version }}" > current_version_file
+        
+        semver=${{ github.event.inputs.new_version }}     
+
+        echo "$semver" > current_version_file
         IFS='.' read major minor patch<current_version_file
         dev_semver="$major.$minor.$(($patch + 1))"
-        semver={{ github.event.inputs.new_version }}     
         echo "Next dev semver is v$dev_semver-dev"
         echo "Next semver is v$semver"
                 
