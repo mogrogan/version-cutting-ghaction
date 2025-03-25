@@ -60,7 +60,7 @@ jobs:
         sed -i -E 's/(VersionPrerelease\s*=\s*)""/\1"dev"/' "./version/version.go"                        
         git diff
         git add ./version/version.go
-        git commit -m "version: prepare v$dev_semver"
+        git commit -m "version: prepare v$dev_semver-dev"
         printf "\n\n"
 
         echo -e "$Green# PUSHING COMMITS AND TAG #"
