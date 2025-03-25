@@ -56,9 +56,5 @@ jobs:
         git commit -m "version: prepare v$dev_semver"
 
         exit 1
-    - run: git add ./version/version.go ./README.md
-    - run: cat ./version/version.go 
-    - run: git commit -m "$CUTTING_VERSION_COMMIT_MSG"
-    - run: git tag "v${{ github.event.inputs.new_version }}"
     - run: git push
     - run: git push origin "v${{ github.event.inputs.new_version }}"
