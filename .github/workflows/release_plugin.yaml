@@ -54,7 +54,8 @@ jobs:
         git diff
         git add ./version/version.go
         git commit -m "version: prepare v$dev_semver"
+        echo
 
-        exit 1
-    - run: git push
-    - run: git push origin "v${{ github.event.inputs.new_version }}"
+        echo "# PUSHING COMMITS AND TAG #"
+        git push
+        git push origin "v$semver"
