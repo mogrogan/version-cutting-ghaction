@@ -22,9 +22,10 @@ jobs:
     - name: update version.go and README.md version for cutting release
       run: |
         set -e
-        
 
-        
+        last_tag=$(git describe --tags --abbrev=0)
+        echo "Last tag is $last_tag"
+                
         sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
         sed -i 's/\"dev\"/""/g'  "./version/version.go"
         sed -E 's/">=\s[0-9]*\\.[0-9]*\\.[0-9]*"/">= ${{ github.event.inputs.new_version }}"/g' ./README.md
