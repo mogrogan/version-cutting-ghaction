@@ -29,12 +29,11 @@ jobs:
         echo "Last tag is $last_tag"
 
         echo "${{ github.event.inputs.new_version }}" > current_version_file
-        cat current_version_file
         IFS='.' read major minor patch<current_version_file
-
-        dev_patch=$(($patch + 1))
         dev_semver="$major.$minor.$(($patch + 1))"
-        echo "Next dev semver is v$dev_semver"
+        semver={{ github.event.inputs.new_version }}     
+        echo "Next dev semver is v$dev_semver-dev"
+        echo "Next semver is v$semver"
                 
         sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
         sed -i 's/\"dev\"/""/g'  "./version/version.go"
