@@ -29,19 +29,20 @@ jobs:
         echo "# SETTING UP SEMVER VALUES #"
         last_tag=$(git describe --tags --abbrev=0)
         last_semver=${last_tag:1}
-        echo "Last semver is v$last_semver"
         semver=${{ github.event.inputs.new_version }}     
         echo "$semver" > current_version_file
         IFS='.' read major minor patch<current_version_file
         dev_semver="$major.$minor.$(($patch + 1))"
-        echo "Next dev semver is v$dev_semver-dev"
-        echo "Next semver is v$semver"
         echo
 
         if git rev-parse -q --verify "refs/tags/v$semver" >/dev/null; then
-          echo "error: v$semver already exists."
+          echo "error: release v$semver already exists."
           exit 1
         fi
+
+        echo "Last semver is v$last_semver"
+        echo "Next dev semver is v$dev_semver-dev"
+        echo "Next semver is v$semver"
 
         echo "# CUTTING RELEASE v$semver #"
         sed -i -E "s/$last_semver/$semver/g" "./version/version.go"                        
