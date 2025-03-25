@@ -18,6 +18,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     - uses: actions4git/setup-git@v1
     - name: update version.go and README.md version for cutting release
       run: |
