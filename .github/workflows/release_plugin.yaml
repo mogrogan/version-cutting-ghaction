@@ -45,8 +45,7 @@ jobs:
         printf "\n\n"
 
         echo -e "$Green# CUTTING RELEASE v$semver #"
-        sed -i -E "s/$last_semver/$semver/g" "./version/version.go"                        
-        sed -i -E 's/(Version\s*=\s*)".*"/\1""/' "./version/version.go"                        
+        sed -i -E "s/(Version\s*=\s*)\".*\"/\1\"$semver\"/" "./version/version.go"                        
         sed -i -E "s/$last_semver/$semver/g" "./README.md"                        
         sed -i -E 's/(VersionPrerelease\s*=\s*)"dev"/\1""/' "./version/version.go"                        
         git diff
