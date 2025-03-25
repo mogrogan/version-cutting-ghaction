@@ -38,8 +38,10 @@ jobs:
         echo
 
         echo "# CUT RELEASE #"
-        sed "s/$last_semver/$semver/g" --regexp-extended "./version/version.go"        
-                        
+        sed "s/$last_semver/$semver/g" --regexp-extended "./version/version.go"                        
+        sed 's/\"dev\"/""/g' "./version/version.go"
+
+
         # sed -i 's/\([0-9]*\.[0-9]*\.[0-9]*\)/${{ github.event.inputs.new_version }}/g'  "./version/version.go"
         # sed -i 's/\"dev\"/""/g'  "./version/version.go"
         # sed -E 's/">=\s[0-9]*\\.[0-9]*\\.[0-9]*"/">= ${{ github.event.inputs.new_version }}"/g' ./README.md
