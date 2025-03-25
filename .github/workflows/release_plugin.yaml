@@ -25,8 +25,10 @@ jobs:
       run: |
         set -e
 
+        Red='\033[0;31m'          # Red
+        Green='\033[0;32m' 
 
-        echo "# SETTING UP SEMVER VALUES #"
+        echo "$Green# SETTING UP SEMVER VALUES #"
         last_tag=$(git describe --tags --abbrev=0)
         last_semver=${last_tag:1}
         semver=${{ github.event.inputs.new_version }}     
@@ -63,6 +65,7 @@ jobs:
         git commit -m "version: prepare v$dev_semver"
         echo
 
+        exit 1
         echo "# PUSHING COMMITS AND TAG #"
         git push
         git push origin "v$semver"
